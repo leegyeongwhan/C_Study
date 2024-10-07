@@ -1,0 +1,17 @@
+# 모든 .log 파일 무시
+*.log
+
+# node_modules 디렉토리 무시
+node_modules/
+
+# .env 파일 무시
+.env
+
+# 특정 디렉토리 내의 모든 파일 무시
+temp/*
+
+# 특정 파일 무시
+secret.txt
+
+.vscode
+c_study/c++example/
