@@ -85,7 +85,7 @@ public:
 		if (n == 0)
 			return "";
 
-		stddata::ostringstream os;
+		std::ostringstream os;
 		os << data[0];
 
 		for (int i = 1; i < n; i++)
