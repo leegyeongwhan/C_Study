@@ -89,7 +89,49 @@ public:
 		head = newNode;
 	}
 
+
+	void erase(const T& value)
+	{
+		auto cur = head, dummy = head->prev;
+		while (cur != dummy)
+		{
+			if (*(cur->data) == value)
+			{
+				cur->prev->next = cur->next;
+				cur->next->prev = cur->prev;
+				if (cur == head)
+					head = head->next;
+				delete cur;
+				n--;
+				return;
+			}
+			cur = cur->next;
+		}
+	}
 }
+
+struct playlist
+{
+	cir_list<int> list;
+
+	void insert(int song)
+	{
+		list.insert(song);
+	}
+
+	void erase(int song)
+	{
+		list.erase(song);
+	}
+
+	void loopOnce()
+	{
+		for (auto& song : list)
+			std::cout << song << " ";
+		std::cout << std::endl;
+	}
+};
+
 int main()
 {
 	playlist pl;
