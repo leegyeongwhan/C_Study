@@ -21,6 +21,12 @@
 4. 기본 컨테이너를 만든 후, 이 컨테이너를 기반으로 재생 목록에 여러 음악을 저장하고 nextO,
 previousO, printallO, insertO, removeO 같은 함수를 작성합니다.
  */
+
+
+//Had 는 항상 마지막 노드를 가리키고있어야한다.
+//->단순 연결리스트는 마지막 링크가 NULL이다
+// head == 마지막 노드주소
+
 template <typename T>
 struct Node
 {
@@ -74,6 +80,7 @@ public:
 
 		n++;
 		//타입 추록 auto
+		//headprev는 마지막 Node
 		auto dummy = this.head->prev; //여기서 prev 이전 node를 가리키는 pointer
 		dummy->next = newNode; //이전 node 를 새로운 노드에 연결
 		newNode->prev = dummy; //
@@ -93,13 +100,17 @@ public:
 	void erase(const T& value)
 	{
 		auto cur = head, dummy = head->prev;
-		while (cur != dummy)
+		while (cur != dummy) //끝까지 반복
 		{
+			 // 현재 노드의 데이터가 찾고자 하는 값과 일치하는 경우
 			if (*(cur->data) == value)
 			{
 				cur->prev->next = cur->next;
 				cur->next->prev = cur->prev;
+
+				//만약 지금 현재 노드가 헤드라면
 				if (cur == head)
+				//다음 노드를 넣는다
 					head = head->next;
 				delete cur;
 				n--;
@@ -108,6 +119,21 @@ public:
 			cur = cur->next;
 		}
 	}
+
+
+struct cir_list_it
+	{
+	private:
+		node_ptr ptr;
+
+	public:
+		cir_list_it(node_ptr p) : ptr(p) {}
+
+	// 역참조 연산자
+		T& operator*()
+		{
+			return *(ptr->data);
+		}
 }
 
 struct playlist
@@ -132,6 +158,28 @@ struct playlist
 	}
 };
 
+struct playlist
+{
+	cir_list<int> list;
+
+	void insert(int song)
+	{
+		list.insert(song);
+	}
+
+	void erase(int song)
+	{
+		list.erase(song);
+	}
+
+	void loopOnce()
+	{
+		for (auto& song : list)
+			std::cout << song << " ";
+		std::cout << std::endl;
+	}
+};
+ur->prev->ne
 int main()
 {
 	playlist pl;
